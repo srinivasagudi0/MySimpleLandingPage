@@ -20,6 +20,7 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
+    <!-- Header stays pretty simple on purpose. -->
     <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="Sri home">
         <span class="brand-mark">SG</span>
@@ -48,6 +49,7 @@
     </header>
 
     <main id="main">
+      <!-- Hero = intro on the left, interactive stuff on the right. -->
       <section class="hero" id="top">
         <div class="hero-inner">
           <div class="hero-grid">
@@ -69,6 +71,7 @@
                 <a class="button button-secondary" href="#contact">Contact Sri</a>
               </div>
 
+              <!-- Quick labels so the intro does not turn into one giant paragraph. -->
               <div class="signal-list" aria-label="Current interests">
                 <span>Python Builder</span>
                 <span>Marvel Fan</span>
@@ -77,58 +80,53 @@
               </div>
             </div>
 
-            <aside class="hero-panel" data-reveal aria-label="System status">
-              <div class="panel-kicker">
-                <span class="panel-dot"></span>
-                Quick Facts
-              </div>
+            <aside class="hero-panel" data-reveal aria-label="Interactive tools">
+              <!-- This stack is where the site feels alive without turning into a toy. -->
+              <section class="panel command-deck" aria-labelledby="command-deck-title">
+                <div class="panel-kicker">
+                  <span class="panel-dot"></span>
+                  Command Deck
+                </div>
+                <h2 class="command-title" id="command-deck-title">Try stuff here.</h2>
+                <ol class="console-log" data-console-log aria-live="polite" aria-label="Command output"></ol>
+                <form class="console-form" data-command-form>
+                  <label class="sr-only" for="command-input">Enter a command</label>
+                  <input
+                    class="command-input"
+                    id="command-input"
+                    name="command"
+                    type="text"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="type help or projects"
+                    data-command-input
+                  >
+                  <button class="command-submit" type="submit">Run it</button>
+                </form>
+                <div class="command-hints" aria-label="Suggested commands">
+                  <span>Try:</span>
+                  <div class="command-chips">
+                    <button class="command-chip" type="button" data-command-chip="projects">projects</button>
+                    <button class="command-chip" type="button" data-command-chip="jarvis_hud">jarvis_hud</button>
+                    <button class="command-chip" type="button" data-command-chip="goal">goal</button>
+                    <button class="command-chip" type="button" data-command-chip="contact">contact</button>
+                  </div>
+                </div>
+              </section>
 
-              <div class="hero-diagram" aria-hidden="true">
-                <svg class="hero-schematic" viewBox="0 0 420 320">
-                  <defs>
-                    <linearGradient id="cyanBeam" x1="0%" x2="100%" y1="0%" y2="100%">
-                      <stop offset="0%" stop-color="#9cefff"></stop>
-                      <stop offset="100%" stop-color="#1fc6f2"></stop>
-                    </linearGradient>
-                  </defs>
-                  <rect x="20" y="24" width="380" height="272" rx="24"></rect>
-                  <circle cx="210" cy="160" r="92"></circle>
-                  <circle cx="210" cy="160" r="54"></circle>
-                  <circle cx="210" cy="160" r="20" class="core"></circle>
-                  <path d="M210 68v-28"></path>
-                  <path d="M210 280v-28"></path>
-                  <path d="M118 160H82"></path>
-                  <path d="M338 160h-36"></path>
-                  <path d="M145 95 118 68"></path>
-                  <path d="m302 225 24 24"></path>
-                  <path d="m145 225-27 27"></path>
-                  <path d="m302 95 24-24"></path>
-                  <path class="beam" d="M210 106 244 160 210 214 176 160Z"></path>
-                  <circle cx="210" cy="160" r="112" class="outer-orbit"></circle>
-                </svg>
-              </div>
-
-              <div class="status-grid">
-                <article>
-                  <span class="status-label">Current Grade</span>
-                  <strong>9th Grade</strong>
-                </article>
-                <article>
-                  <span class="status-label">Big Goal</span>
-                  <strong>OpenAI Full-Stack Engineer</strong>
-                </article>
-                <article>
-                  <span class="status-label">Style</span>
-                  <strong>Stark-inspired UI</strong>
-                </article>
-                <article>
-                  <span class="status-label">Main Stack</span>
-                  <strong>Python First</strong>
-                </article>
-              </div>
+              <section class="panel activity-panel" aria-labelledby="activity-title">
+                <div class="panel-kicker">
+                  <span class="panel-dot"></span>
+                  Recent Activity
+                </div>
+                <h2 class="activity-title" id="activity-title">Stuff from GitHub</h2>
+                <p class="activity-state" data-activity-state>Loading recent activity...</p>
+                <ul class="activity-list" data-activity-list aria-live="polite"></ul>
+              </section>
             </aside>
           </div>
 
+          <!-- Small rail under the hero so the intro is still scannable. -->
           <div class="hero-rail" data-reveal>
             <article>
               <span>Main Focus</span>
@@ -150,16 +148,18 @@
         </div>
       </section>
 
+      <!-- About section stays direct. No fake founder story here. -->
       <section class="section" id="about">
         <div class="section-heading" data-reveal>
           <p class="eyebrow">About / Mission</p>
-          <h2>This site shows who I am.</h2>
+          <h2>This site is supposed to sound like me.</h2>
           <p>
             I wanted it to feel real and personal, not like a template trying too hard.
           </p>
         </div>
 
         <div class="about-grid">
+          <!-- Main story goes here. -->
           <article class="panel story-card" data-reveal>
             <p>
               I like Tony Stark and JARVIS because the tech feels smart, clean, and
@@ -180,6 +180,7 @@
             </p>
           </article>
 
+          <!-- Shorter list on the side so the section does not feel too heavy. -->
           <aside class="panel mission-card" data-reveal>
             <div class="panel-kicker">
               <span class="panel-dot"></span>
@@ -196,6 +197,7 @@
         </div>
       </section>
 
+      <!-- Main project first, then the rest. -->
       <section class="section" id="projects">
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Featured Projects</p>
@@ -205,6 +207,7 @@
           </p>
         </div>
 
+        <!-- This is the strongest project, so it gets more room. -->
         <article class="panel project-feature" data-reveal>
           <div class="project-copy">
             <p class="card-label">Main Project // Python</p>
@@ -227,6 +230,9 @@
             </div>
 
             <div class="project-actions">
+              <button class="project-open" type="button" data-project-open="jarvis_hud">
+                Open details
+              </button>
               <a
                 href="https://github.com/srinivasagudi0/Jarvis_HUD"
                 target="_blank"
@@ -238,6 +244,7 @@
           </div>
 
           <div class="project-visual" aria-hidden="true">
+            <!-- Decorative only. It is here to support the feel of the feature card. -->
             <div class="screen-frame">
               <div class="screen-topline"></div>
               <div class="screen-grid"></div>
@@ -249,6 +256,7 @@
           </div>
         </article>
 
+        <!-- The next row is more compact on purpose. -->
         <div class="project-grid">
           <article class="panel project-card" data-reveal>
             <p class="card-label">Python</p>
@@ -261,13 +269,18 @@
             <p class="project-why">
               Why it matters: it shows I like building systems, not just single features.
             </p>
-            <a
-              href="https://github.com/srinivasagudi0/InfinityAI"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open Repo
-            </a>
+            <div class="project-card-actions">
+              <button class="project-open" type="button" data-project-open="infinityai">
+                Open details
+              </button>
+              <a
+                href="https://github.com/srinivasagudi0/InfinityAI"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open Repo
+              </a>
+            </div>
           </article>
 
           <article class="panel project-card" data-reveal>
@@ -282,13 +295,18 @@
               Why it matters: it mixes creativity with software in a way that feels
               personal to me.
             </p>
-            <a
-              href="https://github.com/srinivasagudi0/Echo"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open Repo
-            </a>
+            <div class="project-card-actions">
+              <button class="project-open" type="button" data-project-open="echo">
+                Open details
+              </button>
+              <a
+                href="https://github.com/srinivasagudi0/Echo"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open Repo
+              </a>
+            </div>
           </article>
 
           <article class="panel project-card" data-reveal>
@@ -301,50 +319,82 @@
             <p class="project-why">
               Why it matters: it is practical and built around a real student problem.
             </p>
-            <a
-              href="https://github.com/srinivasagudi0/StudyFocus"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open Repo
-            </a>
+            <div class="project-card-actions">
+              <button class="project-open" type="button" data-project-open="studyfocus">
+                Open details
+              </button>
+              <a
+                href="https://github.com/srinivasagudi0/StudyFocus"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open Repo
+              </a>
+            </div>
           </article>
         </div>
 
+        <!-- Smaller projects still matter, they just do not need huge cards. -->
         <div class="panel side-projects" data-reveal>
           <div class="panel-kicker">
               <span class="panel-dot"></span>
               More Projects
             </div>
+          <!-- Smaller cards keep this row lighter. -->
           <div class="micro-projects">
-            <a
-              href="https://github.com/srinivasagudi0/Daily-Song-Journal"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <article class="micro-project">
               <strong>Daily-Song-Journal</strong>
               <span>One song per day, logged like a personal signal feed.</span>
-            </a>
-            <a
-              href="https://github.com/srinivasagudi0/Luck-Arcade"
-              target="_blank"
-              rel="noreferrer"
-            >
+              <div class="micro-project-actions">
+                <button class="project-open" type="button" data-project-open="daily_song_journal">
+                  Open details
+                </button>
+                <a
+                  href="https://github.com/srinivasagudi0/Daily-Song-Journal"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Repo
+                </a>
+              </div>
+            </article>
+            <article class="micro-project">
               <strong>Luck-Arcade</strong>
               <span>Small arcade project with both CLI and Flask play modes.</span>
-            </a>
-            <a
-              href="https://github.com/srinivasagudi0/Spotify-Playlist-Generator"
-              target="_blank"
-              rel="noreferrer"
-            >
+              <div class="micro-project-actions">
+                <button class="project-open" type="button" data-project-open="luck_arcade">
+                  Open details
+                </button>
+                <a
+                  href="https://github.com/srinivasagudi0/Luck-Arcade"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Repo
+                </a>
+              </div>
+            </article>
+            <article class="micro-project">
               <strong>Spotify-Playlist-Generator</strong>
               <span>Mood-to-music recommendations built around speed and feeling.</span>
-            </a>
+              <div class="micro-project-actions">
+                <button class="project-open" type="button" data-project-open="spotify_playlist_generator">
+                  Open details
+                </button>
+                <a
+                  href="https://github.com/srinivasagudi0/Spotify-Playlist-Generator"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Repo
+                </a>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
+      <!-- Real wins, real clubs, nothing inflated. -->
       <section class="section" id="wins">
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Wins + Community</p>
@@ -352,6 +402,7 @@
           <p>The important parts outside the repo list.</p>
         </div>
 
+        <!-- This row is the real-life side of the site. -->
         <div class="wins-grid">
           <article class="panel win-card" data-reveal>
             <div class="panel-kicker">
@@ -395,6 +446,7 @@
         </div>
       </section>
 
+      <!-- Short timeline, because the point is direction more than fake certainty. -->
       <section class="section" id="timeline">
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Timeline / Future Direction</p>
@@ -402,6 +454,7 @@
           <p>I am early, but I know what direction I want to take.</p>
         </div>
 
+        <!-- Kept short on purpose. I do not need a fake giant roadmap here. -->
         <div class="timeline-grid">
           <article class="panel timeline-card" data-reveal>
             <span class="timeline-step">01 / Right Now</span>
@@ -438,6 +491,7 @@
         </div>
       </section>
 
+      <!-- Only the contact info I actually want public goes here. -->
       <section class="section contact-section" id="contact">
         <div class="contact-shell panel" data-reveal>
           <div class="contact-copy">
@@ -448,6 +502,7 @@
             </p>
           </div>
 
+          <!-- Just the links I actually want public. -->
           <div class="contact-links" aria-label="Contact links">
             <a href="mailto:srinivasagudi0@gmail.com">
               <span>Email</span>
@@ -470,6 +525,35 @@
       <p>&copy; <span data-year>2026</span> Srinivasa Gudi</p>
       <a href="#top">Back to top</a>
     </footer>
+
+    <!-- One shared drawer keeps the project details easier to maintain. -->
+    <div class="project-drawer-shell" data-project-drawer-shell hidden>
+      <div class="drawer-backdrop" data-drawer-backdrop></div>
+      <!-- Drawer content gets filled from JS so the cards and console can share it. -->
+      <aside
+        class="project-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-drawer-title"
+        tabindex="-1"
+        data-project-drawer
+      >
+        <button class="drawer-close" type="button" aria-label="Close project details" data-drawer-close>
+          <span aria-hidden="true">×</span>
+        </button>
+        <span class="drawer-status" data-drawer-status hidden></span>
+        <h2 class="drawer-title" id="project-drawer-title" data-drawer-title></h2>
+        <p class="drawer-summary" data-drawer-summary></p>
+        <div class="drawer-copy">
+          <p class="drawer-label">Why it matters</p>
+          <p data-drawer-why></p>
+        </div>
+        <div class="drawer-tags" data-drawer-tags></div>
+        <a class="drawer-link" href="#" target="_blank" rel="noreferrer" data-drawer-link>
+          View repository
+        </a>
+      </aside>
+    </div>
 
     <script src="script.js"></script>
   </body>

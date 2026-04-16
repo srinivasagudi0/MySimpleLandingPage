@@ -1,3 +1,4 @@
+/* Base page stuff first. */
 :root {
   color-scheme: light;
   --paper: #ede7dc;
@@ -109,10 +110,23 @@ section {
   transition: transform 180ms ease;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .skip-link:focus {
   transform: translateY(0);
 }
 
+/* Header and nav. */
 .site-header {
   position: fixed;
   top: 0;
@@ -284,6 +298,7 @@ section {
   color: var(--panel-text);
 }
 
+/* Hero setup. */
 .hero {
   position: relative;
   overflow: clip;
@@ -449,6 +464,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Shared panel bits. */
 .panel {
   position: relative;
   overflow: hidden;
@@ -494,94 +510,198 @@ section {
 }
 
 .hero-panel {
-  padding: clamp(1.3rem, 3vw, 1.7rem);
+  display: grid;
+  gap: 1rem;
+  align-content: start;
 }
 
-.hero-diagram {
+/* Command deck + recent activity. */
+.command-deck,
+.activity-panel {
+  padding: clamp(1.35rem, 3vw, 1.75rem);
+}
+
+/* Slight offsets keep the right-side stack from feeling too perfectly mirrored. */
+.command-deck {
+  margin-right: clamp(0.45rem, 1.6vw, 0.95rem);
+}
+
+.activity-panel {
+  margin-left: clamp(0.9rem, 2.8vw, 1.4rem);
+}
+
+.command-title,
+.activity-title {
   position: relative;
-  min-height: 20rem;
-  margin-bottom: 1.2rem;
-  border-radius: calc(var(--radius-lg) - 6px);
-  border: 1px solid rgba(143, 233, 255, 0.12);
-  background:
-    radial-gradient(circle at center, rgba(143, 233, 255, 0.16), transparent 32%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+  z-index: 1;
+  margin-bottom: 1rem;
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+  line-height: 1.15;
 }
 
-.hero-diagram::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, transparent 38%, rgba(143, 233, 255, 0.09) 50%, transparent 62%);
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.hero-schematic {
-  width: 100%;
-  height: 100%;
-}
-
-.hero-schematic rect,
-.hero-schematic circle,
-.hero-schematic path {
-  fill: none;
-  stroke: rgba(143, 233, 255, 0.42);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.hero-schematic rect {
-  fill: rgba(255, 255, 255, 0.02);
-}
-
-.hero-schematic .core {
-  fill: rgba(143, 233, 255, 0.28);
-  stroke: rgba(255, 255, 255, 0.5);
-}
-
-.hero-schematic .beam {
-  fill: url(#cyanBeam);
-  opacity: 0.32;
-  stroke: rgba(143, 233, 255, 0.18);
-}
-
-.hero-schematic .outer-orbit {
-  stroke-dasharray: 8 10;
-}
-
-.status-grid {
+.console-log {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 0.8rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  min-height: 11.4rem;
+  max-height: 14rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
 }
 
-.status-grid article {
-  padding: 1rem;
+.console-line {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  padding: 0.78rem 0.9rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(143, 233, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(143, 233, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(239, 248, 255, 0.8);
+  line-height: 1.6;
 }
 
-.status-label {
-  display: block;
-  margin-bottom: 0.55rem;
-  color: rgba(239, 248, 255, 0.66);
-  font-size: 0.78rem;
+.console-line::before {
+  content: ">";
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.console-line--hint::before {
+  color: var(--gold);
+}
+
+.console-line--error::before {
+  color: #ff9582;
+}
+
+.console-form {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+}
+
+.command-input,
+.command-submit,
+.project-open,
+.drawer-link {
+  min-height: 3rem;
+  border-radius: 999px;
+  font: inherit;
+}
+
+.command-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(143, 233, 255, 0.14);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--panel-text);
+}
+
+.command-input::placeholder {
+  color: rgba(239, 248, 255, 0.5);
+}
+
+.command-submit,
+.project-open {
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(143, 233, 255, 0.18);
+  background: linear-gradient(135deg, rgba(143, 233, 255, 0.12), rgba(143, 233, 255, 0.2));
+  color: var(--panel-text);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.command-submit:hover,
+.command-submit:focus-visible,
+.project-open:hover,
+.project-open:focus-visible,
+.command-chip:hover,
+.command-chip:focus-visible,
+.drawer-link:hover,
+.drawer-link:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.command-hints {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+  margin-left: 0.35rem;
+}
+
+.command-hints > span,
+.activity-state {
+  color: rgba(239, 248, 255, 0.62);
+  font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.status-grid strong {
-  display: block;
-  font-size: 1rem;
-  line-height: 1.45;
+.command-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
 }
 
+.command-chip {
+  padding: 0.7rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(143, 233, 255, 0.12);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--panel-text);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.command-chip:nth-child(2),
+.command-chip:nth-child(4) {
+  margin-top: 0.22rem;
+}
+
+.activity-state {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0.95rem;
+}
+
+.activity-list {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.activity-list li {
+  padding: 0.85rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(143, 233, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(239, 248, 255, 0.78);
+  line-height: 1.6;
+}
+
+/* Small status rail under the hero. */
 .hero-rail {
   display: grid;
   gap: 1rem;
@@ -596,6 +716,14 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
+}
+
+.hero-rail article:nth-child(2) {
+  margin-top: 0.9rem;
+}
+
+.hero-rail article:nth-child(4) {
+  margin-top: -0.28rem;
 }
 
 .hero-rail span {
@@ -638,6 +766,7 @@ section {
   line-height: 1.75;
 }
 
+/* About, projects, wins, timeline, contact. */
 .about-grid {
   display: grid;
   gap: 1rem;
@@ -701,11 +830,16 @@ section {
   background: rgba(255, 255, 255, 0.03);
 }
 
+/* Featured project gets the bigger treatment. */
 .project-feature {
   display: grid;
   gap: 1.2rem;
   grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.92fr);
   margin-bottom: 1rem;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .card-label {
@@ -747,9 +881,18 @@ section {
   margin-top: 1.5rem;
 }
 
+.project-actions,
+.project-card-actions,
+.micro-project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
 .project-actions a,
+.project-card-actions a,
+.micro-project-actions a,
 .project-card a,
-.micro-projects a,
 .contact-links a {
   transition:
     transform 180ms ease,
@@ -758,7 +901,8 @@ section {
     background 180ms ease;
 }
 
-.project-actions a {
+.project-actions a,
+.drawer-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -772,10 +916,12 @@ section {
 
 .project-actions a:hover,
 .project-actions a:focus-visible,
+.project-card-actions a:hover,
+.project-card-actions a:focus-visible,
+.micro-project-actions a:hover,
+.micro-project-actions a:focus-visible,
 .project-card a:hover,
 .project-card a:focus-visible,
-.micro-projects a:hover,
-.micro-projects a:focus-visible,
 .contact-links a:hover,
 .contact-links a:focus-visible {
   transform: translateY(-2px);
@@ -787,6 +933,7 @@ section {
   min-height: 22rem;
 }
 
+/* The feature art is just CSS, so it can stay lightweight. */
 .screen-frame {
   position: absolute;
   inset: 0;
@@ -854,6 +1001,7 @@ section {
   font-weight: 600;
 }
 
+/* Cards below the feature are a little uneven on purpose. */
 .tag-a {
   top: 12%;
   right: 10%;
@@ -875,9 +1023,22 @@ section {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* These tiny offsets are intentional. They break the template-perfect row without hurting readability. */
+.project-grid .project-card:nth-child(2) {
+  margin-top: 1rem;
+}
+
+.project-grid .project-card:nth-child(3) {
+  margin-top: -0.35rem;
+}
+
 .project-card {
   display: flex;
   flex-direction: column;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .project-why {
@@ -886,12 +1047,18 @@ section {
   color: rgba(239, 248, 255, 0.86);
 }
 
-.project-card a {
+.project-card-actions {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.1rem;
+}
+
+.project-card a,
+.micro-project-actions a {
   position: relative;
   z-index: 1;
   display: inline-flex;
   width: fit-content;
-  margin-top: 1.1rem;
   padding-bottom: 0.15rem;
   border-bottom: 1px solid rgba(143, 233, 255, 0.32);
   color: var(--cyan);
@@ -899,7 +1066,9 @@ section {
 }
 
 .project-card a:hover,
-.project-card a:focus-visible {
+.project-card a:focus-visible,
+.micro-project-actions a:hover,
+.micro-project-actions a:focus-visible {
   color: #d7f8ff;
   border-color: rgba(215, 248, 255, 0.6);
 }
@@ -908,6 +1077,7 @@ section {
   margin-top: 1rem;
 }
 
+/* Small cards let this area feel faster to scan. */
 .micro-projects {
   position: relative;
   z-index: 1;
@@ -916,32 +1086,62 @@ section {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.micro-projects a {
+.micro-project {
   padding: 1rem;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(143, 233, 255, 0.1);
   background: rgba(255, 255, 255, 0.03);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
 }
 
-.micro-projects strong,
-.micro-projects span {
+.micro-project:nth-child(2) {
+  margin-top: 0.8rem;
+}
+
+.micro-project strong,
+.micro-project span {
   display: block;
 }
 
-.micro-projects strong {
+.micro-project strong {
   margin-bottom: 0.45rem;
   font-size: 0.95rem;
 }
 
-.micro-projects span {
+.micro-project span {
   color: rgba(239, 248, 255, 0.72);
   line-height: 1.65;
+}
+
+.micro-project-actions {
+  margin-top: 1rem;
+}
+
+.project-feature:hover,
+.project-feature:focus-within,
+.project-card:hover,
+.project-card:focus-within,
+.micro-project:hover,
+.micro-project:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(143, 233, 255, 0.2);
 }
 
 .wins-grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.wins-grid .win-card:nth-child(2) {
+  margin-top: 0.9rem;
+}
+
+.wins-grid .win-card:nth-child(3) {
+  margin-top: -0.22rem;
 }
 
 .tag-cloud {
@@ -957,6 +1157,14 @@ section {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.timeline-grid .timeline-card:nth-child(2) {
+  margin-top: 0.6rem;
+}
+
+.timeline-grid .timeline-card:nth-child(4) {
+  margin-top: -0.32rem;
 }
 
 .timeline-step {
@@ -1000,6 +1208,10 @@ section {
   background: rgba(255, 255, 255, 0.04);
 }
 
+.contact-links a:last-child {
+  margin-left: 0.95rem;
+}
+
 .contact-links span,
 .contact-links strong {
   display: block;
@@ -1041,11 +1253,134 @@ section {
   outline: none;
 }
 
+/* Global focus stays visible. */
 a:focus-visible {
   outline: 2px solid rgba(31, 198, 242, 0.58);
   outline-offset: 3px;
 }
 
+/* Drawer. */
+body.drawer-open {
+  overflow: hidden;
+}
+
+.project-drawer-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 10, 16, 0.72);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.project-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: min(100%, 30rem);
+  height: 100dvh;
+  padding: clamp(1.35rem, 3vw, 1.75rem);
+  border-left: 1px solid rgba(143, 233, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(143, 233, 255, 0.05), transparent 24%),
+    linear-gradient(180deg, var(--panel-elevated), var(--panel));
+  color: var(--panel-text);
+  box-shadow: -18px 0 60px rgba(0, 0, 0, 0.35);
+  transform: translateX(100%);
+  transition: transform 220ms ease;
+}
+
+.project-drawer-shell.is-open .drawer-backdrop {
+  opacity: 1;
+}
+
+.project-drawer-shell.is-open .project-drawer {
+  transform: translateX(0);
+}
+
+.drawer-close {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  border: 1px solid rgba(143, 233, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--panel-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.drawer-status {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(143, 233, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--cyan);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.05;
+}
+
+.drawer-summary,
+.drawer-copy p {
+  margin: 0;
+  color: rgba(239, 248, 255, 0.8);
+  line-height: 1.75;
+}
+
+.drawer-copy {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.drawer-label {
+  color: rgba(239, 248, 255, 0.62);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.drawer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.drawer-tags span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(143, 233, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--panel-text);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* Reveal and motion. */
 html.js-ready [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
@@ -1060,13 +1395,8 @@ html.js-ready [data-reveal].is-visible {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-diagram::after,
   .screen-frame::after {
     animation: scanSweep 4.6s linear infinite;
-  }
-
-  .hero-schematic .core {
-    animation: pulseCore 2.2s ease-in-out infinite;
   }
 
   .screen-core {
@@ -1074,12 +1404,30 @@ html.js-ready [data-reveal].is-visible {
   }
 }
 
+/* Breakpoints. */
 @media (max-width: 1080px) {
   .hero-grid,
   .project-feature,
   .contact-shell,
   .about-grid {
     grid-template-columns: 1fr;
+  }
+
+  .command-deck,
+  .activity-panel,
+  .project-grid .project-card:nth-child(2),
+  .project-grid .project-card:nth-child(3),
+  .micro-project:nth-child(2),
+  .hero-rail article:nth-child(2),
+  .hero-rail article:nth-child(4),
+  .wins-grid .win-card:nth-child(2),
+  .wins-grid .win-card:nth-child(3),
+  .timeline-grid .timeline-card:nth-child(2),
+  .timeline-grid .timeline-card:nth-child(4),
+  .contact-links a:last-child {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
   }
 
   .project-grid,
@@ -1113,6 +1461,10 @@ html.js-ready [data-reveal].is-visible {
 
   .hero {
     padding-top: calc(var(--header-height) + 1.8rem);
+  }
+
+  .project-drawer {
+    width: min(100%, 34rem);
   }
 }
 
@@ -1178,8 +1530,49 @@ html.js-ready [data-reveal].is-visible {
     grid-template-columns: 1fr;
   }
 
-  .status-grid {
+  .console-form {
     grid-template-columns: 1fr;
+  }
+
+  .command-hints {
+    margin-left: 0;
+  }
+
+  .command-submit,
+  .drawer-link {
+    width: 100%;
+  }
+
+  .project-actions,
+  .project-card-actions,
+  .micro-project-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-links a:last-child {
+    margin-left: 0;
+  }
+
+  .project-open {
+    width: 100%;
+  }
+
+  .project-drawer {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: min(100dvh, 100%);
+    border-left: 0;
+    border-top: 1px solid rgba(143, 233, 255, 0.16);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    transform: translateY(100%);
+  }
+
+  .project-drawer-shell.is-open .project-drawer {
+    transform: translateY(0);
   }
 
   .site-footer {
@@ -1208,6 +1601,7 @@ html.js-ready [data-reveal].is-visible {
   }
 }
 
+/* Tiny animations only. */
 @keyframes pulseCore {
   0%,
   100% {
